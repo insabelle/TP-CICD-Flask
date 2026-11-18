@@ -49,15 +49,13 @@ jobs:
       - name: Executer les tests
         run: python -m pytest -v
 
-  deploy:
+    deploy:
     name: Deploy Application
     needs: test
     runs-on: ubuntu-latest
+
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
     steps:
-      - name: Declencher le deploiement Render
-        env:
-          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: |
-          curl --fail --show-error --silent \
-            --request POST "$DEPLOY_URL"
+      - name: Vérifier la réussite des tests
+        run: echo "Build et Tests réussis. Déploiement à configurer."
